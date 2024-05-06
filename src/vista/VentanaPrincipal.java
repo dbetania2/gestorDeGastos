@@ -1,11 +1,8 @@
 package vista;
 
 import javax.swing.*;
-import javax.swing.JFrame;
 
 public class VentanaPrincipal extends JFrame {
-
-    private JLabel Jlabel;
 
     public VentanaPrincipal() {
         // Configuración de la ventana principal
@@ -26,17 +23,14 @@ public class VentanaPrincipal extends JFrame {
         // Agregar panel a la ventana principal
         add(panel);
 
-        // Mostrar la ventana
-        setVisible(true);
-    }
-
-    // Método main para probar la ventana
-    public static void main(String[] args) {
-        // Crear una instancia de la ventana principal en el hilo de despacho de eventos de Swing
-        SwingUtilities.invokeLater(() -> {
-            new VentanaPrincipal();
+        // Asignar acción al botón "Abrir"
+        boton.addActionListener(e -> {
+            // Crear y mostrar la ventana de inicio al hacer clic en el botón "Abrir"
+            VentanaInicio ventanaInicio = new VentanaInicio();
+            ventanaInicio.setVisible(true);
         });
     }
 }
+
 
 
