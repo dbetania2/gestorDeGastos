@@ -1,36 +1,36 @@
-package vista;
+package App.vista;
 
-import javax.swing.*;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
-public class VentanaPrincipal extends JFrame {
+public class VentanaPrincipal {
 
-    public VentanaPrincipal() {
-        // Configuración de la ventana principal
-        setTitle("Gestor de Gastos Personales");
-        setSize(400, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); // Centrar la ventana en la pantalla
-
+    public void mostrarVentana() {
         // Crear componentes de la interfaz
-        JPanel panel = new JPanel();
-        JLabel label = new JLabel("Bienvenido al Gestor de Gastos Personales");
-        JButton boton = new JButton("Abrir");
+        Label label = new Label("Bienvenido al Gestor de Gastos Personales");
+        Button botonAbrir = new Button("Abrir");
 
-        // Agregar componentes al panel
-        panel.add(label);
-        panel.add(boton);
-
-        // Agregar panel a la ventana principal
-        add(panel);
-
-        // Asignar acción al botón "Abrir"
-        boton.addActionListener(e -> {
+        // Configurar la acción del botón "Abrir"
+        botonAbrir.setOnAction(e -> {
             // Crear y mostrar la ventana de inicio al hacer clic en el botón "Abrir"
             VentanaInicio ventanaInicio = new VentanaInicio();
-            ventanaInicio.setVisible(true);
+            ventanaInicio.mostrarVentana();
         });
+
+        // Crear el diseño de la ventana principal
+        StackPane layout = new StackPane();
+        layout.getChildren().addAll(label, botonAbrir);
+
+        // Configurar la escena y mostrar la ventana principal
+        Scene scene = new Scene(layout, 400, 300);
+        Stage primaryStage = new Stage();
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Gestor de Gastos Personales");
+        primaryStage.show();
     }
 }
-
 
 

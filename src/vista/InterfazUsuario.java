@@ -1,8 +1,8 @@
-package vista;
+package App.vista;
 
 import java.util.List;
 import java.util.Scanner;
-import modelo.Gasto;
+import App.modelo.Gasto;
 
 public class InterfazUsuario {
     private Scanner scanner;

@@ -1,37 +1,41 @@
-package vista;
+package App.vista;
 
-import javax.swing.*;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
-public class VentanaInicio extends JFrame {
+public class VentanaInicio {
 
-    private JPanel panel1;
-
-    public VentanaInicio() {
+    public void mostrarVentana() {
         // Configuración de la ventana de inicio
-        setTitle("Inicio");
-        setSize(600, 400);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Cambiar a DISPOSE_ON_CLOSE
-        setLocationRelativeTo(null); // Centrar la ventana en la pantalla
+        Stage primaryStage = new Stage();
+        primaryStage.setTitle("Inicio");
 
         // Crear componentes de la interfaz
-        JPanel panel = new JPanel();
-        JTextPane textPane = new JTextPane();
-        JButton button = new JButton("Agregar Gasto");
+        BorderPane root = new BorderPane();
+        TextArea textArea = new TextArea();
+        Button button = new Button("Agregar Gasto");
 
-        // Agregar componentes al panel
-        panel.add(textPane);
-        panel.add(button);
+        // Agregar componentes al layout
+        root.setCenter(textArea);
+        root.setBottom(button);
 
-        // Agregar panel a la ventana de inicio
-        add(panel);
-
-        // Asignar acción al botón "Agregar Gasto"
-        button.addActionListener(e -> {
+        // Configurar la acción del botón "Agregar Gasto"
+        button.setOnAction(e -> {
             // Aquí debes manejar la lógica para agregar un gasto
             // Por ahora, simplemente mostraremos un mensaje
-            JOptionPane.showMessageDialog(this, "¡Gasto agregado!"); // Ventana de mensaje
+            System.out.println("¡Gasto agregado!"); // Imprimir en consola
         });
+
+        // Configurar la escena y mostrar la ventana de inicio
+        Scene scene = new Scene(root, 600, 400);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 }
+
+
 
 
