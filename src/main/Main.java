@@ -1,24 +1,16 @@
 package main;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import App.vista.VentanaCarga;
 
-public class Main extends Application {
-    @Override
-    public void start(Stage primaryStage) {
-        Label label = new Label("Hello, JavaFX!");
-        Scene scene = new Scene(label, 400, 300);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("My JavaFX Application");
-        primaryStage.show();
-    }
-
+public class Main {
     public static void main(String[] args) {
-        launch(args);
+        Application.launch(VentanaCarga.class, args);
     }
 }
+
+
 
 
 
