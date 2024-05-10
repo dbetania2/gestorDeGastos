@@ -5,10 +5,10 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            styleClass="ventana-carga"> <!-- Aplica la clase de estilo para la ventana de carga -->
-   <children>
-      <Text styleClass="texto-cargando" text="Cargando..." />
-   </children>
+            styleClass="ventana-inicio"> <!-- Aplica la clase de estilo para la ventana de inicio -->
+    <children>
+        <Text styleClass="texto-bienvenidos" text="¡Bienvenidos!" />
+    </children>
 </AnchorPane>
 
 

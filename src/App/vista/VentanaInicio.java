@@ -1,21 +1,27 @@
 package App.vista;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class VentanaInicio extends Application {
 
     @Override
-    public void start(Stage primaryStage) {
-        // Configura y muestra la ventana de inicio
-        Label label = new Label("¡Bienvenido a la Ventana de Inicio!");
-        StackPane root = new StackPane(label);
-        Scene scene = new Scene(root, 400, 300);
+    public void start(Stage primaryStage) throws Exception {
+        // Cargar el archivo FXML de la Ventana de Inicio
+        Parent root = FXMLLoader.load(getClass().getResource("/resources/VentanaInicio.fxml"));
+
+        // Crear la escena y agregar el archivo CSS
+        Scene scene = new Scene(root, 600, 400);
+        scene.getStylesheets().add(getClass().getResource("/resources/Style.css").toExternalForm());
+
+        // Configurar y mostrar la ventana de inicio
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Ventana de Inicio");
+        primaryStage.setTitle("Gestor de Gastos Personales");
         primaryStage.show();
     }
+
 }
+
