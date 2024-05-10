@@ -3,5 +3,8 @@ module gestoDeGastosPersonales {
     requires javafx.fxml;
 
     exports App.vista; // Exporta el paquete App.vista
+
+    opens main;
+
 }
 

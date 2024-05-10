@@ -1,0 +1,20 @@
+/* Estilo para el label */
+.label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+/* Estilo para el botón */
+.button {
+    -fx-font-size: 14px;
+    -fx-background-color: #4286f4;
+    -fx-text-fill: white;
+    -fx-padding: 8px 16px;
+    -fx-border-radius: 5px;
+}
+
+/* Estilo para el botón cuando se presiona */
+.button:pressed {
+    -fx-background-color: #1a3eab;
+}
