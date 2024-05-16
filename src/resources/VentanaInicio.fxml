@@ -1,14 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
+<VBox styleClass="contenedor-principal" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <!-- Contenedor para los bloques de gastos -->
+    <HBox styleClass="contenedor-funcionalidades">
+        <children>
+            <!-- Primer bloque de gasto -->
+            <BorderPane styleClass="bloque-gasto" HBox.hgrow="ALWAYS">
+                <center>
+                    <VBox>
+                        <Label styleClass="texto-gasto" text="Número de Gasto del Día" />
+                        <Separator />
+                        <Label styleClass="texto-total" text="Gasto Total del Día" />
+                    </VBox>
+                </center>
+            </BorderPane>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            styleClass="ventana-inicio"> <!-- Aplica la clase de estilo para la ventana de inicio -->
-    <children>
-        <Text styleClass="texto-bienvenidos" text="¡Bienvenidos!" />
-    </children>
-</AnchorPane>
+            <!-- Segundo bloque de gasto -->
+            <BorderPane styleClass="bloque-gasto" HBox.hgrow="ALWAYS">
+                <center>
+                    <VBox>
+                        <Label styleClass="texto-gasto" text="Número de Gasto del Mes" />
+                        <Separator />
+                        <Label styleClass="texto-total" text="Gasto Total del Mes" />
+                    </VBox>
+                </center>
+            </BorderPane>
+
+            <!-- Tercer bloque de gasto -->
+            <BorderPane styleClass="bloque-gasto" HBox.hgrow="ALWAYS">
+                <center>
+                    <VBox>
+                        <Label styleClass="texto-gasto" text="Número de Gasto del Año" />
+                        <Separator />
+                        <Label styleClass="texto-total" text="Gasto Total del Año" />
+                    </VBox>
+                </center>
+            </BorderPane>
+        </children>
+    </HBox>
+
+    <!-- Contenedor para los botones de acciones -->
+    <VBox styleClass="contenedor-botones-funcionalidades">
+        <children>
+            <Button mnemonicParsing="false" styleClass="boton-agregar-gasto" text="Agregar" />
+            <Button mnemonicParsing="false" styleClass="boton-eliminar-gasto" text="Eliminar" />
+            <Button mnemonicParsing="false" styleClass="boton-buscar-gasto" text="Buscar" />
+            <Button mnemonicParsing="false" styleClass="boton-historial" text="Historial" />
+        </children>
+    </VBox>
+</VBox>
+
+
 
 

@@ -15,7 +15,7 @@ public class VentanaInicio extends Application {
 
         // Crear la escena y agregar el archivo CSS
         Scene scene = new Scene(root, 600, 400);
-        scene.getStylesheets().add(getClass().getResource("/resources/Style.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/resources/style.css").toExternalForm());
 
         // Configurar y mostrar la ventana de inicio
         primaryStage.setScene(scene);

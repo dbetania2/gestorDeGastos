@@ -14,7 +14,7 @@ public class VentanaCarga extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/resources/VentanaCarga.fxml"));
         Scene scene = new Scene(root, 300, 200);
-        scene.getStylesheets().add(getClass().getResource("/resources/Style.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/resources/style.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.setTitle("Cargando...");
         primaryStage.show();
