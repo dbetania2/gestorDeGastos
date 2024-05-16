@@ -63,7 +63,7 @@
 
     .contenedor-botones-funcionalidades {
         -fx-spacing: 5px; /* Espaciado entre los botones */
-        -fx-alignment: center; /* Alineación al centro */
+        -fx-alignment: center; /* Alineación a centro */
     }
 
     .boton-agregar-gasto, .boton-eliminar-gasto, .boton-buscar-gasto, .boton-historial {
