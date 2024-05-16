@@ -1,19 +1,23 @@
-package main;
+package App.vista;
 
-import App.vista.VentanaCarga;
-import App.vista.VentanaInicio;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class Main extends Application {
+public class VentanaCarga extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Iniciar la ventana de carga
-        VentanaCarga ventanaCarga = new VentanaCarga();
-        ventanaCarga.start(primaryStage);
+        Parent root = FXMLLoader.load(getClass().getResource("/resources/VentanaCarga.fxml"));
+        Scene scene = new Scene(root, 300, 200);
+        scene.getStylesheets().add(getClass().getResource("/resources/style.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Cargando...");
+        primaryStage.show();
 
         // Crear una transición de pausa para cambiar a la ventana de inicio después de 2 segundos
         PauseTransition delay = new PauseTransition(Duration.seconds(2));
@@ -33,7 +37,6 @@ public class Main extends Application {
         launch(args);
     }
 }
-
 
 
 

@@ -1,0 +1,87 @@
+/* Estilos para el contenedor principal */
+.contenedor-principal {
+    -fx-alignment: center; /* Centra los elementos horizontalmente */
+    -fx-spacing: 20px; /* Espaciado entre los elementos */
+    -fx-padding: 20px; /* Relleno interior */
+}
+
+/* Estilos para los bloques de gastos */
+.bloque-gasto {
+    -fx-background-color: #ffffff; /* Color de fondo */
+    -fx-border-color: #cccccc; /* Color del borde */
+    -fx-border-width: 1px; /* Grosor del borde */
+    -fx-padding: 20px; /* Relleno interior */
+    -fx-margin: 10px; /* Margen entre los bloques */
+    -fx-min-width: 200px; /* Ancho mínimo */
+    -fx-max-width: 300px; /* Ancho máximo */
+}
+
+/* Estilos para los textos dentro de los bloques de gastos */
+.texto-gasto {
+    -fx-font-size: 16px; /* Tamaño de la fuente */
+    -fx-font-weight: bold; /* Negrita */
+}
+
+.texto-total {
+    -fx-font-size: 14px; /* Tamaño de la fuente */
+}
+
+/* Estilos para el separador */
+.separator {
+    -fx-padding: 5px; /* Espaciado interno */
+}
+
+/* Estilos para los botones de acciones */
+.contenedor-botones-funcionalidades {
+    -fx-spacing: 10px; /* Espaciado entre los botones */
+}
+
+.boton-agregar-gasto, .boton-eliminar-gasto, .boton-buscar-gasto, .boton-historial {
+    -fx-background-color: #4CAF50; /* Color de fondo */
+    -fx-text-fill: white; /* Color del texto */
+    -fx-font-size: 14px; /* Tamaño de la fuente */
+    -fx-padding: 10px 20px; /* Relleno interior */
+    -fx-border-radius: 5px; /* Borde redondeado */
+}
+
+.boton-agregar-gasto:hover, .boton-eliminar-gasto:hover, .boton-buscar-gasto:hover, .boton-historial:hover {
+    -fx-background-color: #45a049; /* Color de fondo al pasar el ratón */
+}
+
+/* Estilos responsivos */
+@media only screen and (max-width: 600px) {
+    .contenedor-principal {
+        -fx-padding: 10px; /* Relleno interior */
+    }
+
+    .bloque-gasto {
+        -fx-padding: 10px; /* Relleno interior */
+        -fx-margin: 5px; /* Margen entre los bloques */
+        -fx-min-width: 150px; /* Ancho mínimo */
+        -fx-max-width: 250px; /* Ancho máximo */
+    }
+
+    .contenedor-botones-funcionalidades {
+        -fx-spacing: 5px; /* Espaciado entre los botones */
+        -fx-alignment: center; /* Alineación a centro */
+    }
+
+    .boton-agregar-gasto, .boton-eliminar-gasto, .boton-buscar-gasto, .boton-historial {
+        -fx-padding: 8px 16px; /* Relleno interior */
+        -fx-font-size: 12px; /* Tamaño de la fuente */
+    }
+}
+
+/* Estilos para VentanaCarga */
+.ventana-carga {
+    -fx-pref-width: 300px;
+    -fx-pref-height: 200px;
+}
+
+/* Estilos para el texto "Cargando..." */
+.texto-cargando {
+    -fx-layout-x: 92px;
+    -fx-layout-y: 94px;
+}
+
+
