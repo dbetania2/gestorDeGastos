@@ -1,109 +1,122 @@
 package App.controlador;
-
-import java.util.List;
-import java.util.Scanner;
-import App.modelo.Gasto;
-import App.modelo.GestorGastos;
-import App.vista.InterfazUsuario;
+import javafx.scene.control.Button; // Asegúrate de tener esta importación
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import java.time.LocalDate;
+import java.io.IOException;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader; // Importa la clase FXMLLoader
 
 public class Controlador {
-    private InterfazUsuario interfazUsuario;
-    private GestorGastos gestorGastos;
-    private Scanner scanner;
 
-    public Controlador(InterfazUsuario interfazUsuario, GestorGastos gestorGastos, Scanner scanner) {
-        this.interfazUsuario = interfazUsuario;
-        this.gestorGastos = gestorGastos;
-        this.scanner = scanner;
+    @FXML
+    private Button historialButton;
+    @FXML
+    private VBox formularioAgregarGasto;
+
+    @FXML
+    private TextField cantidadTextField;
+
+    @FXML
+    private TextField descripcionTextField;
+
+    @FXML
+    private TextField categoriaTextField;
+
+    @FXML
+    private TextField diaTextField;
+
+    @FXML
+    private TextField mesTextField;
+
+    @FXML
+    private TextField añoTextField;
+
+    @FXML
+    private void mostrarFormularioAgregarGasto() {
+        // Obtener la fecha actual
+        LocalDate fechaActual = LocalDate.now();
+
+        // Obtener el día, mes y año
+        int dia = fechaActual.getDayOfMonth();
+        int mes = fechaActual.getMonthValue();
+        int año = fechaActual.getYear();
+
+        // Actualizar los campos de texto con la fecha actual
+        diaTextField.setText(String.valueOf(dia));
+        mesTextField.setText(String.valueOf(mes));
+        añoTextField.setText(String.valueOf(año));
+
+        formularioAgregarGasto.setVisible(true);
     }
 
-    public void iniciar() {
-        boolean ejecutando = true;
-        while (ejecutando) {
-            interfazUsuario.mostrarMenu();
-            int opcion = scanner.nextInt();
-            scanner.nextLine(); // Limpiar el buffer del scanner
-            switch (opcion) {
-                case 1:
-                    // Leer los datos del gasto desde la interfaz de usuario
-                    String[] datosGasto = interfazUsuario.leerGasto();
-                    double cantidad = Double.parseDouble(datosGasto[0]);
-                    String descripcion = datosGasto[1];
-                    int dia = Integer.parseInt(datosGasto[2]);
-                    int mes = Integer.parseInt(datosGasto[3]);
-                    int año = Integer.parseInt(datosGasto[4]);
-                    String categoria = datosGasto[5]; // Agregar la categoría
-                    // Agregar el nuevo gasto al gestor de gastos
-                    gestorGastos.agregarGasto(new Gasto(cantidad, descripcion, dia, mes, año, categoria));
-                    interfazUsuario.mostrarMensaje("Gasto agregado correctamente.");
-                    break;
+    @FXML
+    private void cambiarFecha() {
+        // Obtener los valores de los campos de texto
+        int nuevoDia = Integer.parseInt(diaTextField.getText());
+        int nuevoMes = Integer.parseInt(mesTextField.getText());
+        int nuevoAño = Integer.parseInt(añoTextField.getText());
 
-                case 2:
-                    // Obtener la lista de gastos del gestor de gastos y mostrarla en la interfaz de usuario
-                    List<Gasto> gastos = gestorGastos.obtenerGastos();
-                    interfazUsuario.mostrarListaGastos(gastos);
-                    break;
-                case 3:
-                    // Salir del bucle y terminar la aplicación
-                    ejecutando = false;
-                    break;
-                case 4:
-                    // Leer el índice del gasto a editar desde la interfaz de usuario
-                    int indiceEditar = interfazUsuario.leerIndice();
-                    // Leer los nuevos datos del gasto desde la interfaz de usuario
-                    String[] datosEditar = interfazUsuario.leerGasto();
-                    double cantidadEditar = Double.parseDouble(datosEditar[0]);
-                    String descripcionEditar = datosEditar[1];
-                    int diaEditar = Integer.parseInt(datosEditar[2]);
-                    int mesEditar = Integer.parseInt(datosEditar[3]);
-                    int añoEditar = Integer.parseInt(datosEditar[4]);
-                    // Editar el gasto en el gestor de gastos
-                    gestorGastos.editarGasto(indiceEditar, cantidadEditar, descripcionEditar, diaEditar, mesEditar, añoEditar);
-                    interfazUsuario.mostrarMensaje("Gasto editado correctamente.");
-                    break;
-
-                case 5:
-                    // Leer el índice del gasto a eliminar desde la interfaz de usuario
-                    int indiceEliminar = interfazUsuario.leerIndice();
-                    // Eliminar el gasto del gestor de gastos
-                    gestorGastos.eliminarGasto(indiceEliminar);
-                    interfazUsuario.mostrarMensaje("Gasto eliminado correctamente.");
-                    break;
-                case 6:
-                    // Leer el día para filtrar desde la interfaz de usuario
-                    int diaFiltrar = interfazUsuario.leerDia();
-                    // Obtener y mostrar el total de gastos del día filtrado
-                    double totalDia = gestorGastos.obtenerTotalGastosDia(diaFiltrar);
-                    interfazUsuario.mostrarMensaje("Total de gastos del día " + diaFiltrar + ": $" + totalDia);
-                    break;
-                case 7:
-                    // Leer el mes para filtrar desde la interfaz de usuario
-                    int mesFiltrar = interfazUsuario.leerMes();
-                    // Obtener y mostrar el total de gastos del mes filtrado
-                    double totalMes = gestorGastos.obtenerTotalGastosMes(mesFiltrar);
-                    interfazUsuario.mostrarMensaje("Total de gastos del mes " + mesFiltrar + ": $" + totalMes);
-                    break;
-                case 8:
-                    // Leer el año para filtrar desde la interfaz de usuario
-                    int añoFiltrar = interfazUsuario.leerAño();
-                    // Obtener y mostrar el total de gastos del año filtrado
-                    double totalAño = gestorGastos.obtenerTotalGastosAño(añoFiltrar);
-                    interfazUsuario.mostrarMensaje("Total de gastos del año " + añoFiltrar + ": $" + totalAño);
-                    break;
-                case 9:
-                    // Obtener y mostrar el resumen de gastos por categoría
-                    List<String> resumenPorCategoria = gestorGastos.obtenerResumenGastosPorCategoria();
-                    interfazUsuario.mostrarResumenPorCategoria(resumenPorCategoria);
-                    break;
-                default:
-                    // Mostrar un mensaje de error si la opción ingresada no es válida
-                    interfazUsuario.mostrarMensaje("Opción no válida. Inténtelo de nuevo.");
-            }
+        // Validar la nueva fecha
+        if (nuevoDia < 1 || nuevoDia > 31 || nuevoMes < 1 || nuevoMes > 12 || nuevoAño < 1900 || nuevoAño > 2100) {
+            // Manejar el error de fecha inválida, por ejemplo, mostrar un mensaje al usuario
+            System.out.println("Fecha inválida. Por favor, ingrese una fecha válida.");
+            return;
         }
-        // Mostrar un mensaje de despedida al usuario al salir de la aplicación
-        interfazUsuario.mostrarMensaje("¡Hasta luego!");
+
+        // Actualizar la fecha
+        diaTextField.setText(String.valueOf(nuevoDia));
+        mesTextField.setText(String.valueOf(nuevoMes));
+        añoTextField.setText(String.valueOf(nuevoAño));
+    }
+
+    @FXML
+    private void agregarGasto() {
+        // Implementa la lógica para agregar un nuevo gasto
+        String cantidad = cantidadTextField.getText();
+        String descripcion = descripcionTextField.getText();
+        String categoria = categoriaTextField.getText();
+        String dia = diaTextField.getText();
+        String mes = mesTextField.getText();
+        String año = añoTextField.getText();
+
+        // Validar y procesar los datos ingresados
+        System.out.println("Gasto agregado: " + descripcion + " - " + cantidad + " - " + categoria + " - " + dia + "/" + mes + "/" + año);
+
+        // Ocultar el formulario después de agregar el gasto
+        formularioAgregarGasto.setVisible(false);
+    }
+
+    @FXML
+    private void eliminarGasto() {
+        // Implementa la lógica para eliminar un gasto
+        System.out.println("Gasto eliminado");
+    }
+    @FXML
+    private void mostrarHistorial() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/VentanaHistorial.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.setTitle("Historial de Gastos");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

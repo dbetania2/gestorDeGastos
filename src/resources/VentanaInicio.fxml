@@ -2,7 +2,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox styleClass="contenedor-principal" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<VBox styleClass="contenedor-principal" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="App.controlador.Controlador">
     <!-- Contenedor para los bloques de gastos -->
     <HBox styleClass="contenedor-funcionalidades">
         <children>
@@ -41,16 +41,52 @@
         </children>
     </HBox>
 
+    <!-- Contenedor para el formulario de agregar gasto -->
+    <VBox fx:id="formularioAgregarGasto" style="-fx-spacing: 10px; -fx-padding: 10px; -fx-border-color: black; -fx-border-width: 1px;" visible="false">
+        <Label text="Agregar Nuevo Gasto" style="-fx-font-weight: bold;"/>
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints hgrow="NEVER"/>
+                <ColumnConstraints hgrow="ALWAYS"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints vgrow="NEVER"/>
+                <RowConstraints vgrow="NEVER"/>
+                <RowConstraints vgrow="NEVER"/>
+                <RowConstraints vgrow="NEVER"/>
+                <RowConstraints vgrow="NEVER"/>
+            </rowConstraints>
+            <Label text="Cantidad:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <TextField fx:id="cantidadTextField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+            <Label text="Descripción:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <TextField fx:id="descripcionTextField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            <Label text="Categoría:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <TextField fx:id="categoriaTextField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            <Label text="Día:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <TextField fx:id="diaTextField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+            <Label text="Mes:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+            <TextField fx:id="mesTextField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+            <Label text="Año:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+            <TextField fx:id="añoTextField" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+        </GridPane>
+        <Button text="Agregar Gasto" onAction="#agregarGasto"/>
+    </VBox>
+
     <!-- Contenedor para los botones de acciones -->
     <VBox styleClass="contenedor-botones-funcionalidades">
         <children>
-            <Button mnemonicParsing="false" styleClass="boton-agregar-gasto" text="Agregar" />
-            <Button mnemonicParsing="false" styleClass="boton-eliminar-gasto" text="Eliminar" />
-            <Button mnemonicParsing="false" styleClass="boton-buscar-gasto" text="Buscar" />
-            <Button mnemonicParsing="false" styleClass="boton-historial" text="Historial" />
+            <Button mnemonicParsing="false" styleClass="boton-agregar-gasto" text="Agregar" onAction="#mostrarFormularioAgregarGasto" />
+            <Button mnemonicParsing="false" styleClass="boton-eliminar-gasto" text="Eliminar" onAction="#eliminarGasto" />
+            <!-- Podemos agregar un botón para buscar gasto -->
+
+            <!-- <Button mnemonicParsing="false" styleClass="boton-buscar-gasto" text="Buscar" />-->
+            <Button fx:id="historialButton" mnemonicParsing="false" styleClass="boton-historial" text="Historial" onAction="#mostrarHistorial" />
+
         </children>
     </VBox>
 </VBox>
+
+
 
 
 

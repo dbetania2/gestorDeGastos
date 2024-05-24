@@ -16,7 +16,9 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="javafx-swt" level="application" />
     <orderEntry type="library" name="javafx-22" level="application" />
+    <orderEntry type="library" name="codehaus.jackson.core.asl" level="application" />
+    <orderEntry type="library" name="fasterxml.jackson.core.databind" level="application" />
+    <orderEntry type="library" name="fasterxml.jackson.core.annotations" level="application" />
   </component>
 </module>

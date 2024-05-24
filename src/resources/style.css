@@ -83,5 +83,27 @@
     -fx-layout-x: 92px;
     -fx-layout-y: 94px;
 }
+/*VetanaHistorial-------------------------------------------------*/
+.tablahistorial {
+    -fx-pref-width: 600px; /* Ancho preferido */
+    -fx-pref-height: 400px; /* Altura preferida */
+    -fx-padding: 10px; /* Relleno */
+}
+
+.tablahistorial .titulo {
+    -fx-font-size: 20px; /* Tamaño de fuente para el título */
+    -fx-font-weight: bold; /* Fuente en negrita */
+}
+
+.tablahistorial .table-cell {
+    -fx-alignment: CENTER; /* Alineación del contenido al centro */
+}
+
+.tablahistorial .table-column {
+    -fx-alignment: CENTER; /* Alineación del contenido al centro */
+}
+
+}
+/*---------------------------------------------------------*/
 
 
