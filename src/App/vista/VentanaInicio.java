@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import App.modelo.GestorJSON; // Importamos la clase GestorJSON
 
-import java.util.Objects;
+import java.net.URL; // Importamos la clase URL
 
 public class VentanaInicio extends Application {
 
@@ -16,28 +16,37 @@ public class VentanaInicio extends Application {
         System.out.println("Método start de VentanaInicio llamado");
 
         // Configurar el GestorJSON
-        String rutaArchivoJSON = "src/resources/gastos.json"; // Ruta al archivo JSON
-        GestorJSON gestorJSON = new GestorJSON(rutaArchivoJSON);
-        gestorJSON.crearArchivo(); // Crear el archivo JSON
+        //GestorJSON gestorJSON = new GestorJSON(); // Instanciamos GestorJSON sin argumentos
 
         // Cargar el archivo FXML de la Ventana de Inicio
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/resources/VentanaInicio.fxml")));
+        URL resourceUrl = getClass().getResource("/resources/VentanaInicio.fxml");
+        if (resourceUrl != null) {
+            Parent root = FXMLLoader.load(resourceUrl);
 
-        // Crear la escena y agregar el archivo CSS
-        Scene scene = new Scene(root, 600, 400);
-        scene.getStylesheets().add(getClass().getResource("/resources/style.css").toExternalForm());
+            // Crear la escena y agregar el archivo CSS
+            Scene scene = new Scene(root, 600, 400);
+            URL cssUrl = getClass().getResource("/resources/style.css");
+            if (cssUrl != null) {
+                scene.getStylesheets().add(cssUrl.toExternalForm());
+            } else {
+                System.err.println("No se pudo cargar el archivo CSS.");
+            }
 
-        // Configurar y mostrar la ventana de inicio
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Gestor de Gastos Personales");
-        primaryStage.show();
+            // Configurar y mostrar la ventana de inicio
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Gestor de Gastos Personales");
+            primaryStage.show();
 
-        // Cerrar la ventana de carga después de que la ventana de inicio esté lista
-        primaryStage.setOnShown(event -> {
-            ((Stage) root.getScene().getWindow()).close(); // Cerrar la ventana de carga
-        });
+            // Cerrar la ventana de carga después de que la ventana de inicio esté lista
+            primaryStage.setOnShown(event -> {
+                ((Stage) root.getScene().getWindow()).close(); // Cerrar la ventana de carga
+            });
+        } else {
+            System.err.println("No se pudo cargar el archivo FXML de la Ventana de Inicio.");
+        }
     }
 }
+
 
 
 

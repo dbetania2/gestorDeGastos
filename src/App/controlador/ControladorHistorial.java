@@ -1,18 +1,19 @@
-package App.vista;
-import App.modelo.Gasto;
-import javafx.scene.control.cell.PropertyValueFactory;
+package App.controlador;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
-
+import App.modelo.Gasto;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
-public class VentanaHistorial {
+public class ControladorHistorial {
 
     @FXML
     private VBox root;
@@ -47,13 +48,39 @@ public class VentanaHistorial {
         mesColumn.setCellValueFactory(new PropertyValueFactory<>("mes"));
         añoColumn.setCellValueFactory(new PropertyValueFactory<>("año"));
         cantidadColumn.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
+
+        // Cargar el historial desde el JSON
+        cargarHistorialDesdeJSON();
     }
 
-    // Método para cargar el historial de gastos en la tabla
+    // Método para cargar el historial desde el JSON
+    private void cargarHistorialDesdeJSON() {
+        try {
+            // Leer el JSON y mapearlo a una lista de objetos Gasto
+            ObjectMapper objectMapper = new ObjectMapper();
+            List<Gasto> historial = objectMapper.readValue(getClass().getResource("/resources/gastos.json"), objectMapper.getTypeFactory().constructCollectionType(List.class, Gasto.class));
+
+
+            // Convertir la lista a una lista observable
+            ObservableList<Gasto> observableHistorial = FXCollections.observableArrayList(historial);
+
+            // Establecer los datos en la tabla
+            historialTableView.setItems(observableHistorial);
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Manejar la excepción si ocurre un error al leer el JSON
+        }
+    }
+
+    // Método para cargar el historial desde una lista proporcionada
     public void cargarHistorial(List<Gasto> historial) {
+        // Convertir la lista a una lista observable
         ObservableList<Gasto> observableHistorial = FXCollections.observableArrayList(historial);
+
+        // Establecer los datos en la tabla
         historialTableView.setItems(observableHistorial);
     }
-
-    // Otros métodos para manejar la funcionalidad de la ventana del historial
 }
+
+
+

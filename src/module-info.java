@@ -10,5 +10,7 @@ module gestorDeGastosPersonales {
     opens App.controlador to javafx.fxml; // Abre el paquete controlador también
     opens App.modelo to com.fasterxml.jackson.databind; // Abre el paquete modelo para Jackson
     opens main to javafx.fxml;
+    exports App.controlador;
+    exports App.modelo;
 }
 

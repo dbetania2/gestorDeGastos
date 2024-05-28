@@ -1,57 +1,87 @@
 package App.modelo;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class GestorJSON {
-    private String rutaArchivo;
+    private final String rutaCarpeta = "src/resources/"; // Carpeta donde se guardarán los archivos JSON
 
-    public GestorJSON(String rutaArchivo) {
-        this.rutaArchivo = rutaArchivo;
+    public GestorJSON() {
+        // Constructor vacío
     }
 
-    public void crearArchivo() {
+    // Método para guardar un nuevo gasto en el archivo JSON
+    public void agregarGasto(Gasto nuevoGasto, String nombreArchivo) {
+        ObjectMapper mapper = new ObjectMapper();
         try {
-            File archivo = new File(rutaArchivo);
-            if (archivo.createNewFile()) {
-                System.out.println("Archivo JSON creado en: " + archivo.getAbsolutePath());
+            // Crear el archivo si no existe
+            crearArchivo(nombreArchivo);
+
+            // Obtener la lista de gastos existente
+            List<Gasto> gastos = cargarGastos(nombreArchivo);
+
+            // Agregar el nuevo gasto a la lista
+            gastos.add(nuevoGasto);
+
+            // Guardar la lista actualizada en el archivo JSON
+            File file = new File(rutaCarpeta + nombreArchivo + ".json");
+            mapper.writeValue(file, gastos);
+
+            System.out.println("Gasto agregado y guardado en el archivo JSON: " + nombreArchivo + ".json");
+        } catch (IOException e) {
+            System.err.println("Error al agregar el gasto y guardar en el archivo JSON: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    // Método para cargar la lista de gastos desde el archivo JSON
+    public List<Gasto> cargarGastos(String nombreArchivo) {
+        ObjectMapper mapper = new ObjectMapper();
+        List<Gasto> gastos = null;
+        try {
+            File file = new File(rutaCarpeta + nombreArchivo + ".json");
+            if (file.exists()) {
+                // Cargar la lista de gastos si el archivo existe y no está vacío
+                if (file.length() > 0) {
+                    gastos = mapper.readValue(file, new TypeReference<List<Gasto>>() {});
+                    System.out.println("Gastos cargados desde el archivo JSON: " + nombreArchivo + ".json");
+                } else {
+                    System.err.println("El archivo JSON está vacío: " + nombreArchivo + ".json");
+                }
             } else {
-                System.out.println("El archivo JSON ya existe en: " + archivo.getAbsolutePath());
+                System.err.println("El archivo JSON no existe: " + nombreArchivo + ".json");
+            }
+        } catch (IOException e) {
+            System.err.println("Error al cargar los gastos desde el archivo JSON: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return gastos;
+    }
+
+    // Método para crear el archivo si no existe
+    public void crearArchivo(String nombreArchivo) {
+        try {
+            File file = new File(rutaCarpeta + nombreArchivo + ".json");
+            if (file.createNewFile()) {
+                System.out.println("Archivo JSON creado: " + nombreArchivo + ".json");
+            } else {
+                System.out.println("El archivo JSON ya existe: " + nombreArchivo + ".json");
             }
         } catch (IOException e) {
             System.err.println("Error al crear el archivo JSON: " + e.getMessage());
             e.printStackTrace();
         }
     }
-
-    public void guardarGastos(List<Gasto> gastos) {
-        try (FileWriter writer = new FileWriter(rutaArchivo)) {
-            // Inicializar el JSON
-            writer.write("[\n");
-
-            // Escribir cada gasto en el JSON
-            for (int i = 0; i < gastos.size(); i++) {
-                Gasto gasto = gastos.get(i);
-                String jsonGasto = "{\"cantidad\":\"" + gasto.getCantidad() + "\", \"descripcion\":\"" + gasto.getDescripcion() + "\", \"categoria\":\"" + gasto.getCategoria() + "\", \"dia\":\"" + gasto.getDia() + "\", \"mes\":\"" + gasto.getMes() + "\", \"año\":\"" + gasto.getAño() + "\"}";
-                writer.write(jsonGasto);
-
-                // Si no es el último gasto, añadir una coma
-                if (i < gastos.size() - 1) {
-                    writer.write(",\n");
-                }
-            }
-
-            // Finalizar el JSON
-            writer.write("\n]");
-            System.out.println("Gastos guardados en el archivo JSON.");
-        } catch (IOException e) {
-            System.err.println("Error al guardar los gastos en el archivo JSON: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
 }
+
+
+
+
+
+
 
 
 

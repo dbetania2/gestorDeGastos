@@ -1,18 +1,29 @@
 package App.controlador;
-import javafx.scene.control.Button; // Asegúrate de tener esta importación
+
+import App.modelo.Gasto;
+import App.modelo.GestorJSON;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import java.time.LocalDate;
+import javafx.scene.control.TextField;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader; // Importa la clase FXMLLoader
 
 public class Controlador {
-
     @FXML
     private Button historialButton;
+
+    @FXML
+   // private ControladorHistorial controladorHistorial;
+
+    private final GestorJSON gestorJSON;
+
     @FXML
     private VBox formularioAgregarGasto;
 
@@ -34,6 +45,21 @@ public class Controlador {
     @FXML
     private TextField añoTextField;
 
+    public Controlador() {
+        this.gestorJSON = new GestorJSON();
+    }
+
+    @FXML
+    public void initialize() {
+        // Crear el archivo JSON si no existe
+        gestorJSON.crearArchivo("gastos");
+
+        // Cargar los gastos al iniciar la aplicación
+        List<Gasto> gastos = gestorJSON.cargarGastos("gastos");
+        if (gastos != null) {
+            // Manejar los gastos cargados, por ejemplo, mostrarlos en algún lugar de la interfaz
+        }
+    }
     @FXML
     private void mostrarFormularioAgregarGasto() {
         // Obtener la fecha actual
@@ -73,40 +99,96 @@ public class Controlador {
     }
 
     @FXML
-    private void agregarGasto() {
-        // Implementa la lógica para agregar un nuevo gasto
-        String cantidad = cantidadTextField.getText();
-        String descripcion = descripcionTextField.getText();
-        String categoria = categoriaTextField.getText();
-        String dia = diaTextField.getText();
-        String mes = mesTextField.getText();
-        String año = añoTextField.getText();
+    private void guardarGasto() {
+        try {
+            // Obtener los valores ingresados en los campos de texto del formulario
+            double cantidad = Double.parseDouble(cantidadTextField.getText());
+            String descripcion = descripcionTextField.getText();
+            String categoria = categoriaTextField.getText();
+            int dia = Integer.parseInt(diaTextField.getText());
+            int mes = Integer.parseInt(mesTextField.getText());
+            int año = Integer.parseInt(añoTextField.getText());
 
-        // Validar y procesar los datos ingresados
-        System.out.println("Gasto agregado: " + descripcion + " - " + cantidad + " - " + categoria + " - " + dia + "/" + mes + "/" + año);
+            // Crear el objeto Gasto
+            Gasto nuevoGasto = new Gasto(cantidad, descripcion, dia, mes, año, categoria);
 
-        // Ocultar el formulario después de agregar el gasto
-        formularioAgregarGasto.setVisible(false);
+            // Guardar el gasto en el JSON
+            List<Gasto> listaGastos = new ArrayList<>();
+            listaGastos.add(nuevoGasto);
+            gestorJSON.agregarGasto(nuevoGasto, "gastos");
+
+
+            // Limpiar los campos del formulario
+            limpiarCampos();
+
+            // Hacer invisible el formulario de agregar gasto
+            formularioAgregarGasto.setVisible(false);
+        } catch (NumberFormatException e) {
+            // Capturar la excepción si hay un error al convertir texto en números
+            System.err.println("Error: Los valores ingresados no son válidos.");
+            e.printStackTrace();
+            // Aquí puedes mostrar un mensaje de error al usuario si prefieres
+        } catch (Exception e) {
+            // Capturar cualquier otra excepción que pueda ocurrir
+            System.err.println("Error: No se pudo guardar el gasto.");
+            e.printStackTrace();
+            // Aquí puedes mostrar un mensaje de error al usuario si prefieres
+        }
     }
+    @FXML
+    private void salirDelFormulario() {
+        formularioAgregarGasto.setVisible(false);
+        limpiarCampos();
+    }
+
+
+    private void limpiarCampos() {
+        cantidadTextField.setText("");
+        descripcionTextField.setText("");
+        categoriaTextField.setText("");
+        diaTextField.setText("");
+        mesTextField.setText("");
+        añoTextField.setText("");
+    }
+
 
     @FXML
     private void eliminarGasto() {
-        // Implementa la lógica para eliminar un gasto
-        System.out.println("Gasto eliminado");
+        // Implementar la lógica para eliminar un gasto
+
     }
+
     @FXML
-    private void mostrarHistorial() {
+    private void cargarHistorial() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/VentanaHistorial.fxml"));
+
+            Parent root = loader.load();
+
+            ControladorHistorial controladorHistorial = loader.getController();
+            List<Gasto> historial = gestorJSON.cargarGastos("gastos");
+
+            if (historial != null) {
+                controladorHistorial.cargarHistorial(historial);
+            } else {
+                System.out.println("No se pudo cargar el historial de gastos desde el archivo JSON.");
+            }
+
             Stage stage = new Stage();
-            stage.setScene(new Scene(loader.load()));
+            stage.setScene(new Scene(root));
             stage.setTitle("Historial de Gastos");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }
+
+
+
+
+
 
 
 

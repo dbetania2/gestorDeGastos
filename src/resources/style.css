@@ -83,27 +83,47 @@
     -fx-layout-x: 92px;
     -fx-layout-y: 94px;
 }
-/*VetanaHistorial-------------------------------------------------*/
+/* VetanaHistorial ------------------------------------------------- */
+/* Estilos para la ventana del historial */
 .tablahistorial {
-    -fx-pref-width: 600px; /* Ancho preferido */
-    -fx-pref-height: 400px; /* Altura preferida */
+    -fx-pref-width: 800px; /* Ancho preferido */
+    -fx-pref-height: 600px; /* Altura preferida */
     -fx-padding: 10px; /* Relleno */
 }
 
+/* Estilos para el título */
 .tablahistorial .titulo {
-    -fx-font-size: 20px; /* Tamaño de fuente para el título */
+    -fx-font-size: 24px; /* Tamaño de fuente */
     -fx-font-weight: bold; /* Fuente en negrita */
+    -fx-padding: 10px; /* Relleno */
 }
 
+/* Estilos para las celdas de la tabla */
 .tablahistorial .table-cell {
     -fx-alignment: CENTER; /* Alineación del contenido al centro */
 }
 
+/* Estilos para las columnas de la tabla */
 .tablahistorial .table-column {
     -fx-alignment: CENTER; /* Alineación del contenido al centro */
 }
 
+/* Estilos para las columnas específicas */
+.tablahistorial .fechaColumn,
+.tablahistorial .categoriaColumn,
+.tablahistorial .descripcionColumn,
+.tablahistorial .cantidadColumn {
+    -fx-font-size: 18px; /* Tamaño de fuente */
+    -fx-font-weight: bold; /* Fuente en negrita */
 }
-/*---------------------------------------------------------*/
+
+/* Estilos para las celdas de la tabla */
+.tablahistorial .table-cell {
+    -fx-background-color: #f5f5f5; /* Color de fondo de las celdas */
+    -fx-padding: 5px; /* Relleno */
+}
+
+/* --------------------------------------------------------- */
+
 
 

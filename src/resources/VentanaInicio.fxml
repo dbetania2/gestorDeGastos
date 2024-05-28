@@ -69,7 +69,8 @@
             <Label text="Año:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
             <TextField fx:id="añoTextField" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
         </GridPane>
-        <Button text="Agregar Gasto" onAction="#agregarGasto"/>
+        <Button text="Agregar Gasto" onAction="#guardarGasto"/>
+        <Button text="Salir" onAction="#salirDelFormulario"/>
     </VBox>
 
     <!-- Contenedor para los botones de acciones -->
@@ -80,7 +81,8 @@
             <!-- Podemos agregar un botón para buscar gasto -->
 
             <!-- <Button mnemonicParsing="false" styleClass="boton-buscar-gasto" text="Buscar" />-->
-            <Button fx:id="historialButton" mnemonicParsing="false" styleClass="boton-historial" text="Historial" onAction="#mostrarHistorial" />
+            <Button fx:id="historialButton" mnemonicParsing="false" styleClass="boton-historial" text="Historial" onAction="#cargarHistorial" />
+
 
         </children>
     </VBox>

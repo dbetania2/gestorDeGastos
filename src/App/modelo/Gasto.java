@@ -6,10 +6,12 @@ public class Gasto {
     private int dia;
     private int mes;
     private int año;
+    private String categoria;
 
-    private String categoria; // Nuevo atributo para la categoría del gasto
+    // Constructor predeterminado necesario para la deserialización
+    public Gasto() {
+    }
 
-    // Constructor
     public Gasto(double cantidad, String descripcion, int dia, int mes, int año, String categoria) {
         this.cantidad = cantidad;
         this.descripcion = descripcion;
@@ -19,7 +21,6 @@ public class Gasto {
         this.categoria = categoria;
     }
 
-    // Métodos para obtener la cantidad, la descripción y la fecha del gasto
     public double getCantidad() {
         return cantidad;
     }
@@ -44,7 +45,6 @@ public class Gasto {
         return categoria;
     }
 
-    // Métodos para establecer la cantidad, la descripción y la fecha del gasto
     public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
@@ -69,6 +69,8 @@ public class Gasto {
         this.categoria = categoria;
     }
 }
+
+
 
 
 

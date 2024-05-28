@@ -2,17 +2,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="App.controlador.Controlador">
-    <Label text="Historial de Gastos" styleClass="titulo"/>
-    <TableView styleClass="tablahistorial">
-        <columns>
-            <TableColumn text="Descripción" fx:id="descripcionColumn"/>
-            <TableColumn text="Categoría" fx:id="categoriaColumn"/>
-            <TableColumn text="Fecha" fx:id="fechaColumn"/>
-            <TableColumn text="Cantidad" fx:id="cantidadColumn"/>
-        </columns>
-    </TableView>
-</VBox>
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="App.controlador.ControladorHistorial">
+    <children>
+        <TableView fx:id="historialTableView" prefHeight="200.0" prefWidth="486.0">
+            <columns>
+                <TableColumn fx:id="descripcionColumn" text="Descripción" />
+                <TableColumn fx:id="categoriaColumn" text="Categoría" />
+                <TableColumn fx:id="diaColumn" text="Día" />
+                <TableColumn fx:id="mesColumn" text="Mes" />
+                <TableColumn fx:id="añoColumn" text="Año" />
+                <TableColumn fx:id="cantidadColumn" text="Cantidad" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>
 
 
 
